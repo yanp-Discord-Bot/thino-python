@@ -13,15 +13,6 @@ packages = [
 ]
 
 
-extras_require = {
-    'docs': [
-        'sphinx==4.4.0',
-        'sphinxcontrib_trio==1.1.2',
-        'sphinxcontrib-websupport',
-        'typing-extensions',
-    ],
-}
-
 setup(
     name='thino',
     author='SawshaDev',
