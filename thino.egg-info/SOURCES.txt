@@ -1,8 +1,0 @@
-setup.py
-thino/__init__.py
-thino/main.py
-thino.egg-info/PKG-INFO
-thino.egg-info/SOURCES.txt
-thino.egg-info/dependency_links.txt
-thino.egg-info/requires.txt
-thino.egg-info/top_level.txt
