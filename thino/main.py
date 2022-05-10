@@ -12,4 +12,4 @@ class API:
 
     def get(self):
         response = requests.get(self.url)
-        return response.status_code
+        return response.text
