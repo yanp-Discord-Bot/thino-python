@@ -8,8 +8,8 @@ __all__: Tuple[str, ...] = ('API',)
 
 class API:
     def __init__(self):
-        self.url = "https://thino.pics/api/v1"
+        self.url = "https://thino.pics/api/v1/tomboy"
 
-    def get(self,route:str=None):
-        response = requests.get(self.url +route)
+    def get(self):
+        response = requests.get(self.url)
         return response.status_code
