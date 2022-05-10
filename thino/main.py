@@ -6,7 +6,7 @@ from typing import (
 
 __all__: Tuple[str, ...] = ('API',)
 
-class API():
+class API:
     def __init__(self):
         self.url = "https://thino.pics/api/v1/tomboy"
 
