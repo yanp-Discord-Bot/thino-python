@@ -1,0 +1,10 @@
+Metadata-Version: 1.2
+Name: thino
+Version: 1.1.1
+Summary: An asynchronous python wrapper around the GitHub API
+Home-page: UNKNOWN
+Author: SawshaDev
+License: MIT
+Description: UNKNOWN
+Platform: UNKNOWN
+Requires-Python: >=3.8.0
