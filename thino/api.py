@@ -40,7 +40,7 @@ async def img(target: str):
 
 
 
-def search(target: str):
+async def search(target: str):
 
     if target is None:
         raise errors.EmptyArgument(
@@ -53,7 +53,7 @@ def search(target: str):
         )
 
     try:
-        r = http.search(target.lower())
+        r = await http.search(target.lower())
     except Exception:
         raise errors.NothingFound(noresponse)
 
