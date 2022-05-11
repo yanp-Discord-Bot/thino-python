@@ -16,6 +16,8 @@ class RequestsApi:
     def post(self, url, **kwargs):
         return self.session.post(self.base_url + url, **kwargs)
 
+
+
     @staticmethod
     def __deep_merge(source, destination):
         for key, value in source.items():
@@ -27,9 +29,17 @@ class RequestsApi:
         return destination
 
 
+
+
 baseurl = RequestsApi("https://thino.pics/api/v1/")
+searchurl = RequestsApi("https://i.thino.pics/search/")
+
 
 
 def get(endpoint):
     r = baseurl.get(endpoint)
+    return r.json()
+
+def search(filename):
+    r = searchurl.get(filename)
     return r.json()

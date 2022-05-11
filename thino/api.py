@@ -37,3 +37,29 @@ def img(target: str):
     url = r["url"]
 
     return f"{url}\n{endpoint}"
+
+
+
+def search(target: str):
+
+    if target is None:
+        raise errors.EmptyArgument(
+            "You have to at least define an argument in string format"
+            )
+
+    if not target.lower():
+        raise errors.InvalidArgument(
+            "You haven't added any valid arguments!"
+        )
+
+    try:
+        r = http.search(target.lower())
+    except Exception:
+        raise errors.NothingFound(noresponse)
+
+    endpoint = r["url"]
+    filename = r["filename"]
+    url = r["image"]
+
+    return f"{url}\n{endpoint}\n{filename}"
+
