@@ -34,7 +34,7 @@ class RequestsApi:
 
 
 baseurl = RequestsApi("https://thino.pics/api/v1/")
-searchurl = RequestsApi("https://i.thino.pics/search/")
+searchurl = RequestsApi("https://thino.pics/search/")
 
 
 
