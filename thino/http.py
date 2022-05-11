@@ -1,9 +1,12 @@
 import aiohttp
 
+import asyncio
+
 class RequestsApi:
-    def __init__(self, base_url: str, **kwargs):
+    def __init__(self, base_url: str, loop=None, **kwargs):
+        self.loop = asyncio.get_event_loop() if loop is None else loop
         self.base_url = base_url
-        self.session = aiohttp.ClientSession()
+        self.session = aiohttp.ClientSession(loop=self.loop)
         for arg in kwargs:
             if isinstance(kwargs[arg], dict):
                 kwargs[arg] = self.__deep_merge(getattr(self.session, arg), kwargs[arg])
@@ -23,6 +26,14 @@ class RequestsApi:
     async def post(self, url, **kwargs):
         return await self.session.post(self.base_url + url, **kwargs)
 
+    def _run(self, future):
+        return self.loop.run_until_complete(future)
+
+    async def __aexit__(self, *error_details): 
+    # await but don't return, if exit returns truethy value it suppresses exceptions.
+        await self.run(self.session.close())
+    async def __aenter__(self):
+        return self
 
     @staticmethod
     def __deep_merge(source, destination):
