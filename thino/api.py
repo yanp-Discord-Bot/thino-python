@@ -5,7 +5,7 @@ from . import http, dict, errors
 
 noresponse = "Couldn't contact the API right now..."
 
-def img(target: str):
+async def img(target: str):
     possible = [
         "tomboy",
     ]
@@ -23,8 +23,8 @@ def img(target: str):
         )
 
     try:
-        r = http.get(target.lower())
+        r = await http.get(target.lower())
     except Exception:
         raise errors.NothingFound(noresponse)
 
-    return r["url"]
+    return await r["url"]
