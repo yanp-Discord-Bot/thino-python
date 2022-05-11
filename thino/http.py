@@ -17,7 +17,7 @@ class RequestsApi:
         return self.session.post(self.base_url + url, **kwargs)
 
     async def status(self, url, **kwargs):
-        resp = self.session.get(url)
+        resp = self.session.get(self.base_url+url, **kwargs)
         return resp.status_code
     
     @staticmethod
@@ -46,6 +46,6 @@ async def search(filename):
     r = await searchurl.get(filename)
     return r.json()
 
-async def status():
-    r = await baseurl.status()
+async def status(endpoint):
+    r = await baseurl.status(endpoint)
     return r
