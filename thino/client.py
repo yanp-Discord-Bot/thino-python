@@ -1,8 +1,10 @@
 from __future__ import annotations
-import requests
+import aiohttp
 from typing import (
     Tuple
 )
+
+from .urls import *
 
 __all__: Tuple[str, ...] = ('API',)
 

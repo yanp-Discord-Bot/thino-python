@@ -1,10 +1,12 @@
 
 # == __init__.py ==#
 
-__title__ = 'Github-Api-Wrapper'
-__authors__ = 'VarMonke', 'sudosnok'
+__title__ = 'thino'
+__authors__ = 'SawshaDev'
 __version__ = '1.1.1'
 __license__ = 'MIT'
-__copyright__ = 'Copyright (c) 2020 VarMonke & sudosnok'
+__copyright__ = 'Copyright (c) 2022 SawshaDev'
 
-from .main import *
+from .client import *
+from .urls import *
+from .http import *
