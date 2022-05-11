@@ -5,7 +5,7 @@ from . import http, dict, errors
 
 noresponse = "Couldn't contact the API right now..."
 
-async def img(target: str):
+async def img(target: str, **kwargs):
     possible = [
         "tomboy",
         "helltaker",
@@ -13,7 +13,8 @@ async def img(target: str):
         "neko",
         "hentai",
         "dildo",
-        "porn"
+        "porn",
+        "thighs"
     ]
 
     if target is None:
@@ -28,6 +29,8 @@ async def img(target: str):
             "You haven't added any valid arguments\nArguments: {}".format(possible)
         )
 
+    
+
     try:
         r = await http.get(target.lower())
     except Exception:
@@ -36,7 +39,7 @@ async def img(target: str):
     endpoint = r["endpoint"]
     url = r["url"]
 
-    return f"{url}\n{endpoint}"
+    return r
 
 
 
