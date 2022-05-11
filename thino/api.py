@@ -64,7 +64,7 @@ async def search(target: str):
     filename = r["filename"]
     url = r["image"]
 
-    return f"{url}\n{endpoint}\n{filename}"
+    return r
 
 async def status(target: str):
 
