@@ -16,8 +16,10 @@ class RequestsApi:
     async def post(self, url, **kwargs):
         return self.session.post(self.base_url + url, **kwargs)
 
-
-
+    async def status(self, url, **kwargs):
+        resp = self.session.get(url)
+        return resp.status_code
+    
     @staticmethod
     def __deep_merge(source, destination):
         for key, value in source.items():
@@ -43,3 +45,7 @@ async def get(endpoint):
 async def search(filename):
     r = await searchurl.get(filename)
     return r.json()
+
+async def status():
+    r = await baseurl.status()
+    return r

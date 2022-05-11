@@ -63,3 +63,22 @@ async def search(target: str):
 
     return f"{url}\n{endpoint}\n{filename}"
 
+async def search(target: str):
+
+    if target is None:
+        raise errors.EmptyArgument(
+            "You have to at least define an argument in string format"
+            )
+
+    if not target.lower():
+        raise errors.InvalidArgument(
+            "You haven't added any valid arguments!"
+        )
+
+    try:
+        r = await http.status(target.lower())
+    except Exception:
+        raise errors.NothingFound(noresponse)
+
+
+    return r
