@@ -63,7 +63,7 @@ async def search(target: str):
 
     return f"{url}\n{endpoint}\n{filename}"
 
-async def search(target: str):
+async def status(target: str):
 
     if target is None:
         raise errors.EmptyArgument(
