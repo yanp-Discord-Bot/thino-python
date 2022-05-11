@@ -10,10 +10,10 @@ class RequestsApi:
                 kwargs[arg] = self.__deep_merge(getattr(self.session, arg), kwargs[arg])
             setattr(self.session, arg, kwargs[arg])
 
-    def get(self, url, **kwargs):
+    async def get(self, url, **kwargs):
         return self.session.get(self.base_url + url, **kwargs)
 
-    def post(self, url, **kwargs):
+    async def post(self, url, **kwargs):
         return self.session.post(self.base_url + url, **kwargs)
 
 
@@ -36,10 +36,10 @@ searchurl = RequestsApi("https://i.thino.pics/search/")
 
 
 
-def get(endpoint):
-    r = baseurl.get(endpoint)
+async def get(endpoint):
+    r = await baseurl.get(endpoint)
     return r.json()
 
-def search(filename):
-    r = searchurl.get(filename)
+async def search(filename):
+    r = await searchurl.get(filename)
     return r.json()
