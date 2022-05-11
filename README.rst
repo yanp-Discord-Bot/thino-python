@@ -1,4 +1,5 @@
-# thino-python
+thino-python
+-------------
 A simple async API wrapper for thino.pics API
 
 
@@ -23,7 +24,7 @@ Quick Example
   import asyncio
   
   async def main():
-    return await thino.get("tomboy")
+    return await thino.img("tomboy")
 
   tomboy_result = asyncio.run(main())
   print(tomboy_result)
