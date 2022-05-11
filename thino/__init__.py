@@ -9,4 +9,5 @@ __copyright__ = 'Copyright (c) 2022 SawshaDev'
 
 from . import dict
 from . import http
-from .thino import *
+from .errors import *
+from .api import *
