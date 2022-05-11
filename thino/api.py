@@ -8,7 +8,12 @@ noresponse = "Couldn't contact the API right now..."
 def img(target: str):
     possible = [
         "tomboy",
-        "helltaker"
+        "helltaker",
+        "femboy",
+        "neko",
+        "hentai",
+        "dildo",
+        "porn"
     ]
 
     if target is None:
