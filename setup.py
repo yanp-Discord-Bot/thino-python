@@ -19,7 +19,7 @@ setup(
     version=version,
     packages=packages,
     license='MIT',
-    description='An asynchronous python wrapper around the GitHub API',
+    description='An asynchronous python wrapper around the thino.pics API',
     install_requires=requirements,
     python_requires='>=3.8.0',
 )
