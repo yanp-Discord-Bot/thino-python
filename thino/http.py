@@ -42,7 +42,7 @@ async def get(endpoint):
     r = await baseurl.get(endpoint)
     return r.json()
 
-async def search(filename):
+async def search(filename: str):
     r = await searchurl.get(filename)
     return r.json()
 

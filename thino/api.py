@@ -6,6 +6,8 @@ from . import http, dict, errors
 noresponse = "Couldn't contact the API right now..."
 
 async def img(target: str, **kwargs):
+    
+    
     possible = [
         "tomboy",
         "helltaker",
@@ -14,7 +16,8 @@ async def img(target: str, **kwargs):
         "hentai",
         "dildo",
         "porn",
-        "thighs"
+        "thighs",
+        "feet"
     ]
 
     if target is None:
@@ -36,8 +39,6 @@ async def img(target: str, **kwargs):
     except Exception:
         raise errors.NothingFound(noresponse)
 
-    endpoint = r["endpoint"]
-    url = r["url"]
 
     return r
 
@@ -59,10 +60,6 @@ async def search(target: str):
         r = await http.search(target.lower())
     except Exception:
         raise errors.NothingFound(noresponse)
-
-    endpoint = r["url"]
-    filename = r["filename"]
-    url = r["image"]
 
     return r
 

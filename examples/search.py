@@ -3,7 +3,8 @@ import thino
 
 
 async def main():
-    return await thino.search("cw3qk12xk6p71.png")
+    return await thino.img("tomboy")
+    
 
 search_result = asyncio.run(main())
-print(search_result)
+print(search_result['url'])
