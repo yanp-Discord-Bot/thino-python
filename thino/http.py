@@ -25,7 +25,7 @@ class RequestsApi:
             raise ValueError(f"{endpoint} is not a valid endpoint. \nPlease use a endpoint specified here: {self.ENDPOINTS}")
 
         async with self.session.get(f"{self.base_url}/{endpoint}") as resp:
-            return BaseObject(resp.json(), endpoint)
+            return BaseObject(await resp.json(), endpoint)
     
 
 
