@@ -2,6 +2,7 @@ from typing import Optional
 import aiohttp
 import platform
 from .abc import BaseObject
+import errors
 
 __version__ = "0.0.1"
 
@@ -29,12 +30,23 @@ class RequestsApi:
     
 
 
-    async def post(self, url, **kwargs):
+    async def _post(self, url, **kwargs):
         return await self.session.post(self.base_url + url, **kwargs)
+
+    async def _status(self, endpoint: Optional[str], **kwargs):
+        if self.started == False:
+            await self.start()
+            self.started = True
+
+        if endpoint is None:
+            return errors.EmptyArgument("Please insert an endpoint!")
+
+        async with self.session.get(f"{self.base_url}/{endpoint}") as resp:
+            return await resp.status
 
     async def start(self):
         self.session = aiohttp.ClientSession( headers={
-                "User-Agent": f"Thino-Client @ {__version__}/ Python/{platform.python_version()}/ aiohttp/{aiohttp.__version__}"
+            "User-Agent": f"Thino-Client @ {__version__}/ Python/{platform.python_version()}/ aiohttp/{aiohttp.__version__}"
         })
 
     async def close(self):
@@ -65,11 +77,11 @@ async def get(endpoint):
     return await baseurl._get(endpoint)
 
 async def search(filename: str):
-    r = await searchurl.get(filename)
-    return await r.json()
+    return await searchurl._get(filename)
+
 
 async def status(endpoint):
-    r = await baseurl.status(endpoint)
+    r = await baseurl._status(endpoint)
     return r
 
 async def stop():
