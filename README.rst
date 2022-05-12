@@ -3,6 +3,8 @@ thino-python
 A simple async API wrapper for thino.pics API
 
 
+This library was made for use with libraries such as discord.py, though let alone, this libary will work perfectly normally as long as there is an asyncio enviroment.
+
 **Python 3.8 or higher**
 
 To install the library, run the following command
