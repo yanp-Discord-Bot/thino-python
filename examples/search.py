@@ -7,6 +7,6 @@ async def main():
     return await client.tomboy()
 
 
-femboy = asyncio.run(main())
-print(femboy)
-print(femboy.url)
+tomboy = asyncio.run(main())
+print(tomboy)
+print(tomboy.url) # just gets the URL. in order to get specifc json data, use .raw method.

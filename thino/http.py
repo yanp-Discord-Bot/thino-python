@@ -1,8 +1,8 @@
 from typing import Optional
 import aiohttp
 import platform
-from .abc import BaseObject
-import errors
+from .abc import BaseObject, SearchObject
+import thino.errors 
 
 __version__ = "0.0.1"
 
@@ -27,7 +27,18 @@ class RequestsApi:
 
         async with self.session.get(f"{self.base_url}/{endpoint}") as resp:
             return BaseObject(await resp.json(), endpoint)
-    
+
+    async def _search(self, filename: Optional[str]):
+        if self.started == False:
+            await self.start()
+            self.started = True
+
+        if filename is None:
+            return "Please specify a filename"
+
+        async with self.session.get(f"{self.base_url}/{filename}") as response:
+            return SearchObject(await response.json(), filename)
+
 
 
     async def _post(self, url, **kwargs):
@@ -37,24 +48,26 @@ class RequestsApi:
         if self.started == False:
             await self.start()
             self.started = True
+    
 
         if endpoint is None:
-            return errors.EmptyArgument("Please insert an endpoint!")
+            return thino.errors.EmptyArgument("Please insert an endpoint!")
+    
 
         async with self.session.get(f"{self.base_url}/{endpoint}") as resp:
-            return await resp.status
+            return resp.status
+
+        
 
     async def start(self):
         self.session = aiohttp.ClientSession( headers={
             "User-Agent": f"Thino-Client @ {__version__}/ Python/{platform.python_version()}/ aiohttp/{aiohttp.__version__}"
         })
 
-    async def close(self):
-        """
-        This method will be required on every method call.
-        """
-        self.session.close()
-        
+    
+    async def close(self) -> None:
+        await self.session.close() #type: ignore
+
     @staticmethod
     def __deep_merge(source, destination):
         for key, value in source.items():
@@ -76,14 +89,12 @@ searchurl = RequestsApi("https://thino.pics/search/")
 async def get(endpoint):
     return await baseurl._get(endpoint)
 
-async def search(filename: str):
-    return await searchurl._get(filename)
 
+async def search(query: str) -> SearchObject:
+    return await searchurl._search(query)
 
-async def status(endpoint):
-    r = await baseurl._status(endpoint)
-    return r
+async def status(endpoint: str):
+    return await baseurl._status(endpoint)
 
-async def stop():
-    await baseurl.close()
-    return "Closed!"
+async def close() -> None:
+    await baseurl.session.close() #type: ignore

@@ -1,22 +1,22 @@
-class NekoException(Exception):
+class ThinoException(Exception):
     """Base exception class for nekos.py"""
 
     pass
 
 
-class NothingFound(NekoException):
+class NothingFound(ThinoException):
     """The API didn't return anything"""
 
     pass
 
 
-class EmptyArgument(NekoException):
+class EmptyArgument(ThinoException):
     """When no target is defined"""
 
     pass
 
 
-class InvalidArgument(NekoException):
+class InvalidArgument(ThinoException):
     """Invalid argument within the category"""
 
     pass
