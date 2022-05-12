@@ -9,6 +9,8 @@ This library was made for use with libraries such as discord.py, though let alon
 
 To install the library, run the following command
 
+*Note: you must have git installed in order to install this library.*
+
 .. code:: sh
 
   #Linux/macOS
