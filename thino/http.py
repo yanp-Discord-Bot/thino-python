@@ -1,20 +1,41 @@
+from typing import Optional
 import aiohttp
+import platform
+from .abc import BaseObject
 
+__version__ = "0.0.1"
 
 class RequestsApi:
     def __init__(self, base_url, **kwargs):
         self.base_url = base_url
-        self.session = aiohttp.ClientSession()
+        self.session = None
+        self.started = False
+        self.ENDPOINTS = ["tomboy", "neko", "femboy", "porn", "hentai", "thighs"]
         for arg in kwargs:
             if isinstance(kwargs[arg], dict):
                 kwargs[arg] = self.__deep_merge(getattr(self.session, arg), kwargs[arg])
             setattr(self.session, arg, kwargs[arg])
 
-    async def get(self, url, **kwargs):
-        return await self.session.get(self.base_url + url, **kwargs)
+    async def _get(self, endpoint: Optional[str], **kwargs):
+        if self.started == False:
+            await self.start()
+            self.started = True
+        
+        if endpoint not in self.ENDPOINTS:
+            raise ValueError(f"{endpoint} is not a valid endpoint. \nPlease use a endpoint specified here: {self.ENDPOINTS}")
+
+        async with self.session.get(f"{self.base_url}/{endpoint}") as resp:
+            return BaseObject(resp.json(), endpoint)
+    
+
 
     async def post(self, url, **kwargs):
         return await self.session.post(self.base_url + url, **kwargs)
+
+    async def start(self):
+        self.session = aiohttp.ClientSession( headers={
+                "User-Agent": f"Thino-Client @ {__version__}/ Python/{platform.python_version()}/ aiohttp/{aiohttp.__version__}"
+        })
 
     async def close(self):
         """
@@ -41,8 +62,7 @@ searchurl = RequestsApi("https://thino.pics/search/")
 
 
 async def get(endpoint):
-    r = await baseurl.get(endpoint)
-    return await r.json()
+    return await baseurl._get(endpoint)
 
 async def search(filename: str):
     r = await searchurl.get(filename)

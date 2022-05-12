@@ -1,45 +1,23 @@
 import urllib
 
+from thino.abc import BaseObject
+
 
 from . import http, dict, errors
 
 noresponse = "Couldn't contact the API right now..."
 
-async def img(target: str, **kwargs):
-    
-    
-    possible = [
-        "tomboy",
-        "helltaker",
-        "femboy",
-        "neko",
-        "hentai",
-        "dildo",
-        "porn",
-        "thighs",
-    ]
+class Client:
+    def __init__(self):
+        pass
 
-    if target is None:
-        raise errors.EmptyArgument(
-            "You have to at least define an argument in string format\nArguments: {}".format(
-                possible
-            )
-        )
+    async def tomboy(self) -> BaseObject:
+        return await http.get("tomboy")
 
-    if target.lower() not in possible:
-        raise errors.InvalidArgument(
-            "You haven't added any valid arguments\nArguments: {}".format(possible)
-        )
+    async def femboy(self) -> BaseObject:
+        return await http.get("femboy")
 
     
-
-    try:
-        r = await http.get(target.lower())
-    except Exception:
-        raise errors.NothingFound(noresponse)
-
-
-    return r
 
 
 
