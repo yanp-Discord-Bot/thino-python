@@ -17,7 +17,6 @@ async def img(target: str, **kwargs):
         "dildo",
         "porn",
         "thighs",
-        "feet"
     ]
 
     if target is None:

@@ -1,10 +1,10 @@
-import requests
+import aiohttp
 
 
 class RequestsApi:
     def __init__(self, base_url, **kwargs):
         self.base_url = base_url
-        self.session = requests.Session()
+        self.session = aiohttp.ClientSession()
         for arg in kwargs:
             if isinstance(kwargs[arg], dict):
                 kwargs[arg] = self.__deep_merge(getattr(self.session, arg), kwargs[arg])
@@ -16,10 +16,12 @@ class RequestsApi:
     async def post(self, url, **kwargs):
         return self.session.post(self.base_url + url, **kwargs)
 
-    async def status(self, url, **kwargs):
-        resp = self.session.get(self.base_url+url, **kwargs)
-        return resp.status_code
-    
+    async def close(self):
+        """
+        This method will be required on every method call.
+        """
+        self.session.close()
+        
     @staticmethod
     def __deep_merge(source, destination):
         for key, value in source.items():
