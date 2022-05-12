@@ -51,3 +51,7 @@ async def search(filename: str):
 async def status(endpoint):
     r = await baseurl.status(endpoint)
     return r
+
+async def stop():
+    baseurl.close()
+    return "Closed!"
