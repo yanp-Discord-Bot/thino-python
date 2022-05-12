@@ -11,10 +11,10 @@ class RequestsApi:
             setattr(self.session, arg, kwargs[arg])
 
     async def get(self, url, **kwargs):
-        return self.session.get(self.base_url + url, **kwargs)
+        return await self.session.get(self.base_url + url, **kwargs)
 
     async def post(self, url, **kwargs):
-        return self.session.post(self.base_url + url, **kwargs)
+        return await self.session.post(self.base_url + url, **kwargs)
 
     async def close(self):
         """
@@ -42,16 +42,16 @@ searchurl = RequestsApi("https://thino.pics/search/")
 
 async def get(endpoint):
     r = await baseurl.get(endpoint)
-    return r.json()
+    return await r.json()
 
 async def search(filename: str):
     r = await searchurl.get(filename)
-    return r.json()
+    return await r.json()
 
 async def status(endpoint):
     r = await baseurl.status(endpoint)
     return r
 
 async def stop():
-    baseurl.close()
+    await baseurl.close()
     return "Closed!"

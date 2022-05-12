@@ -58,7 +58,7 @@ async def search(target: str):
     try:
         r = await http.search(target.lower())
     except Exception:
-        raise errors.NothingFound(noresponse)
+        raise await errors.NothingFound(noresponse)
 
     return r
 
@@ -81,3 +81,5 @@ async def status(target: str):
 
 
     return r
+
+
