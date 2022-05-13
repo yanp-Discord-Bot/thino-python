@@ -28,10 +28,12 @@ Quick Example
   import asyncio
   
   async def main():
-    return await thino.img("tomboy")
+    client = thino.Client()
+    return await client.tomboy()
 
   tomboy_result = asyncio.run(main())
   print(tomboy_result)
+  print(tomboy_result.url)
   
   
 Extra Contributions
