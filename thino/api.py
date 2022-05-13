@@ -17,6 +17,21 @@ class Client:
     async def femboy(self) -> BaseObject:
         return await http.get("femboy")
 
+    async def helltaker(self) -> BaseObject:
+        return await http.get("helltaker")
+
+    async def thighs(self) -> BaseObject:
+        return await http.get("thighs")
+
+    async def neko(self) -> BaseObject:
+        return await http.get("neko")
+
+    async def porn(self) -> BaseObject:
+        return await http.get("porn")
+
+    async def get(self, endpoint: str) -> BaseObject:
+        return await http.get(endpoint)
+
     async def search(self, target: str) -> SearchObject:
         return await http.search(target)
 

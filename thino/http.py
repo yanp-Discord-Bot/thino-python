@@ -11,7 +11,7 @@ class RequestsApi:
         self.base_url = base_url
         self.session = None
         self.started = False
-        self.ENDPOINTS = ["tomboy", "neko", "femboy", "porn", "hentai", "thighs"]
+        self.ENDPOINTS = ["tomboy", "neko", "femboy", "porn", "hentai", "thighs", "helltaker"]
         for arg in kwargs:
             if isinstance(kwargs[arg], dict):
                 kwargs[arg] = self.__deep_merge(getattr(self.session, arg), kwargs[arg])
