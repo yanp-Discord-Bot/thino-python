@@ -32,3 +32,8 @@ Quick Example
 
   tomboy_result = asyncio.run(main())
   print(tomboy_result)
+  
+  
+Extra Contributions
+--------------------
+Big thanks to user `VarMonke <https://github.com/VarMonke/>`_ For their contributions and their own API wrapper.
